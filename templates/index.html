@@ -2,8 +2,142 @@
   <head>
     <title>SPOC hetcam Video Stream</title>
   </head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+
   <body>
     <h1>SPOC hetcam Video Stream</h1>
     <img src="{{ url_for('video_feed') }}">
+
+    <div class="navbar">
+    
+      <form method = "post">
+        <div class="camera-movement">
+          <a href=# id=href_0>
+          <button>                   
+            <i class="fa fa-shield fa" style="color: white" aria-hidden="true"></i>
+          </button>
+          </a>
+          <a href=# id=href_90>
+            <button>                   
+              <i class="fa fa-shield fa-rotate-90 fa" style="color: white" aria-hidden="true"></i>
+            </button>
+          </a>
+          <a href=# id=href_180>
+            <button>                  
+              <i class="fa fa-shield fa-rotate-180 fa" style="color: white" aria-hidden="true" ></i>
+            </button>
+          </a>
+          <a href=# id=href_270>
+            <button>                  
+              <i class="fa fa-shield fa-rotate-270 fa" style="color: white" aria-hidden="true" ></i>
+            </button>
+          </a>
+          <a>
+            <button> 
+              <a class="fa fa-files-o" style="color: rgb(28, 168, 28);" href="/gallery" aria-hidden="true" ></a>
+            </button>
+          </a>
+          <a href=# id=picture>
+            <button>                  
+              <i class="fa-camera fa" style="color: rgb(28, 168, 28)" aria-hidden="true" ></i>
+            </button>
+          </a>
+            <!-- this makes round buttons -->
+          <!-- <a href=# id=toggle-switch>
+            <style>
+              .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+              .toggle.ios .toggle-handle { border-radius: 20px; }
+            </style>
+            <input type="checkbox" class='toggle' checked data-toggle="toggle" data-onstyle="success" data-style="ios">
+          </a> -->
+          
+        </div>
+
+      </form>
+    
+    </div>
+
+  <!-- some javascript -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type=text/javascript>
+  $(function() {
+    
+    //json - parse to Python
+    // Motor - 90°
+    $('a#href_0').bind('click', function() {
+      $.getJSON('/move_deg?degree=0',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+    
+    // - Motor - 90°
+    $('a#href_90').bind('click', function() {
+      $.getJSON('/move_deg?degree=90',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+
+    // - Motor - 180°
+    $('a#href_180').bind('click', function() {
+      $.getJSON('/move_deg?degree=180',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+
+    // - Motor - 270°
+    $('a#href_270').bind('click', function() {
+      $.getJSON('/move_deg?degree=270',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+
+    // - Gallery
+    $('a#href_gallery').bind('click', function() {
+      $.getJSON('/gallery',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+
+    // - picture
+    $('a#picture').bind('click', function() {
+      $.getJSON('/picture',
+          function(data) {
+        //do nothing
+      });
+      return false;
+    });
+    
+
+  });    
+  </script>
+
+<script type="text/javascript">
+  
+var button = document.getElementById('button');
+
+button.onclick = function() {
+    var div = document.getElementById('newpost');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+};
+</script>
+
+  
   </body>
 </html>

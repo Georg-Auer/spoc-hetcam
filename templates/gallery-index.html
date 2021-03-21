@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'head-imports.html' %}
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-fixed navbar-inner header" style="padding: 0px 16px">
+            <div class="navbar-brand" style="color: dodgerblue;display: table;">
+                <i class="fa fa-mail-reply fa-3x" style="color: dodgerblue;"></i>
+                <a href="/" style="display: table-cell; vertical-align: middle; padding-left: 15px;">Back to live camera</a>
+            </div>
+
+            <ul class="nav pull-right">
+                <li>
+                    <a class="nav-link" href="/upload">Upload</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/filters">Filters</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section class="container" id="content">
+        {% include 'gallery.html' %}
+    </section>
+    {% include 'scripts.html' %}
+    <script src="{{url_for('static', filename='scripts/main.js')}}"></script>
+</body>
+
+</html>
