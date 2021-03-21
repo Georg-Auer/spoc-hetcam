@@ -1,4 +1,8 @@
-flask-video-streaming
-=====================
+hetcam-video-streaming
 
-Supporting code for my article [video streaming with Flask](http://blog.miguelgrinberg.com/post/video-streaming-with-flask) and its follow-up [Flask Video Streaming Revisited](http://blog.miguelgrinberg.com/post/flask-video-streaming-revisited).
+# SPOC lab CAM²: hetcam-webcam
+
+# How to make the script run on startup:
+# sudo nano /etc/rc.local
+# insert:
+# sudo CAMERA=opencv python3 app.py & > /home/pi/Desktop/log.txt 2>&1
