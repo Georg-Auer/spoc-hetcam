@@ -67,6 +67,15 @@ def gen(camera):
     """Video streaming generator function."""
     while True:
         frame = camera.get_frame()
+
+        # does not work, needs to be changed into an oop solution
+        # global global_video_frame
+        # global_video_frame = frame_unencoded
+
+        # object_methods = [method_name for method_name in dir(camera)
+        #     if callable(getattr(camera, method_name))]
+        # print(object_methods)
+
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -125,12 +134,15 @@ def motor_task(task_id):
 def picture_task(task_position):
     print(f"start of picture task {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
-    # foldername = 'images\'
-    # filename = foldername+filename
-    print(filename)
-    # frame_bytes, frame = global_video_cam.get_frame()
-    # writing image
-    cv2.imwrite(filename, global_video_frame)
+    # # foldername = 'images\'
+    # # filename = foldername+filename
+    # print(filename)
+    # # frame_bytes, frame = global_video_cam.get_frame()
+    # # writing image
+    # cv2.imwrite(filename, global_video_frame)
+
+
+
 #-------------------------------------------------------------------------------------
 
 @app.route('/get_toggled_status') 
