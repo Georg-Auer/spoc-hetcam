@@ -115,8 +115,8 @@ def move_deg():
     degree = int(request.args.get('degree'))
     if(degree >= 280):
         degree = 270
-    if(degree <= -30):
-        degree = -30
+    if(degree <= -40):
+        degree = -40
     print(f"Moving to {degree}°")
     motor_position(degree)
     return '''<h1>Moving to: {}</h1>'''.format(degree)
@@ -159,7 +159,8 @@ def picture_task(task_position):
 
     # image.show()
     open_cv_image = np.array(image)
-    cv2.imwrite(filename, open_cv_image)
+    RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
+    cv2.imwrite(filename, RGB_img)
 
 
 
