@@ -159,6 +159,7 @@ def picture_task(task_position):
 
     # image.show()
     open_cv_image = np.array(image)
+    # rgb channels are in wrong order since the image is from an raspberry camera
     RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
     cv2.imwrite(filename, RGB_img)
 
