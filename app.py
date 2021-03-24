@@ -13,6 +13,7 @@ else:
 # from camera_pi import Camera
 
 # for saving bytestream
+# https://stackoverflow.com/questions/29330570/how-to-open-a-simple-image-using-streams-in-pillow-python
 from PIL import Image
 from io import BytesIO
 
