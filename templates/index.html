@@ -10,6 +10,11 @@
     <h1>SPOC hetcam Video Stream</h1>
     <img src="{{ url_for('video_feed') }}">
 
+<!-- variable for automatic -->
+    <div class="automatic-info">
+      <div class='status'>Automatic On</div>
+    </div>
+
     <div class="navbar">
     
       <form method = "post">
@@ -44,14 +49,14 @@
               <i class="fa-camera fa" style="color: rgb(28, 168, 28)" aria-hidden="true" ></i>
             </button>
           </a>
-            <!-- this makes round buttons -->
-          <!-- <a href=# id=toggle-switch>
+            <!-- this makes round toggle buttons -->
+          <a href=# id=toggle-switch>
             <style>
               .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
               .toggle.ios .toggle-handle { border-radius: 20px; }
             </style>
             <input type="checkbox" class='toggle' checked data-toggle="toggle" data-onstyle="success" data-style="ios">
-          </a> -->
+          </a>
           
         </div>
 
@@ -136,6 +141,33 @@ button.onclick = function() {
         div.style.display = 'block';
     }
 };
+</script>
+
+
+<!-- toggle switch script -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.toggle').click(function() {
+    var current_status = $('.status').text();
+    $.ajax({
+      url: "/get_toggled_status",
+      type: "get",
+      data: {status: current_status},
+      success: function(response) {
+        $(".status").html(response);
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+    });
+  });
 </script>
 
   
