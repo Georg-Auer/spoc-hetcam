@@ -12,6 +12,10 @@ else:
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
 
+# for saving bytestream
+from PIL import Image
+from io import BytesIO
+
 # gallery
 from flask import request, redirect, send_from_directory
 from werkzeug.utils import secure_filename
@@ -66,18 +70,18 @@ def index():
 def gen(camera):
     """Video streaming generator function."""
     while True:
-        frame = camera.get_frame()
+        frame_enc = camera.get_frame()
 
         # does not work, needs to be changed into an oop solution
-        # global global_video_frame
-        # global_video_frame = frame_unencoded
+        global global_video_frame
+        global_video_frame = frame_enc
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
         # print(object_methods)
 
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_enc + b'\r\n')
 
 
 @app.route('/video_feed')
@@ -139,7 +143,21 @@ def picture_task(task_position):
     # print(filename)
     # # frame_bytes, frame = global_video_cam.get_frame()
     # # writing image
-    # cv2.imwrite(filename, global_video_frame)
+
+    gif_bytes_io = BytesIO()
+    # store the gif bytes to the IO and open as image
+    gif_bytes_io.write(global_video_frame)
+    image = Image.open(gif_bytes_io)
+
+    # # save as png through a stream
+    # png_bytes_io = BytesIO() # or io.BytesIO()
+    # image.save(png_bytes_io, format='PNG')
+
+    # # print(png_bytes_io.getvalue()) # outputs the byte stream of the png
+
+    # image.show()
+    open_cv_image = np.array(image)
+    cv2.imwrite(filename, open_cv_image)
 
 
 
