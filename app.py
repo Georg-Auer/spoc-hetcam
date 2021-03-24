@@ -14,6 +14,7 @@ else:
 
 # for saving bytestream
 # https://stackoverflow.com/questions/29330570/how-to-open-a-simple-image-using-streams-in-pillow-python
+# https://stackoverflow.com/questions/14134892/convert-image-from-pil-to-opencv-format
 from PIL import Image
 from io import BytesIO
 
