@@ -5,7 +5,11 @@ hetcam-video-streaming
 How to make the script run on startup:
 sudo nano /etc/rc.local
 insert:
+sudo CAMERA=opencv python3 app.py
+
+or for additional logging:
 sudo CAMERA=opencv python3 app.py & > /home/pi/Desktop/log.txt 2>&1
+
 
 https://blog.miguelgrinberg.com/post/flask-video-streaming-revisited
 

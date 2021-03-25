@@ -125,12 +125,12 @@ def move_deg():
 def motor_task_creator(task_id):
     print(f"start of motor task creator {task_id}")
     # creating motor task that runs every minute
-    scheduler.add_job(func=motor_task, trigger='interval', minutes=2, args=[task_id], id='move'+str(task_id))
+    scheduler.add_job(func=motor_task, trigger='interval', minutes=2, args=task_id, id='move'+str(task_id))
 
 def picture_task_creator(task_id):
     print(f"start of picture task creator {task_id}")
     # creating picture task that runs every minute
-    scheduler.add_job(func=picture_task, trigger='interval', minutes=2, args=[task_id], id='picture'+str(task_id))
+    scheduler.add_job(func=picture_task, trigger='interval', minutes=2, args=task_id, id='picture'+str(task_id))
 
 def motor_task(task_id):
     # send to motor position
@@ -194,9 +194,9 @@ def toggled_status():
             print(degree)
             schedule_time_movement = schedule_start + timedelta(seconds=task_seperation)
             schedule_time_picture = schedule_start + timedelta(seconds=moving_time+task_seperation)
-            scheduler.add_job(func=motor_task_creator, trigger='date', run_date=schedule_time_movement, args=[degree], id='move_start'+str(degree))
+            scheduler.add_job(func=motor_task_creator, trigger='date', run_date=schedule_time_movement, args=int(degree), id='move_start'+str(degree))
             print(f"created moving job {degree} running at {schedule_time_movement}")
-            scheduler.add_job(func=picture_task_creator, trigger='date', run_date=schedule_time_picture, args=[degree], id='picture_start'+str(degree))
+            scheduler.add_job(func=picture_task_creator, trigger='date', run_date=schedule_time_picture, args=int(degree), id='picture_start'+str(degree))
             print(f"created picture job {degree} running at {schedule_time_picture}")
             task_seperation = task_seperation + task_seperation_increase
         print(scheduler.get_jobs())
