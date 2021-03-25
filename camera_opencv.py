@@ -19,10 +19,10 @@ class Camera(BaseCamera):
     def frames():
         camera = cv2.VideoCapture(Camera.video_source)
         try:
-            print "Frame default resolution: (" + str(cap.get(cv.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(cap.get(cv.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
-            cap.set(cv.CV_CAP_PROP_FRAME_WIDTH, 800)
-            cap.set(cv.CV_CAP_PROP_FRAME_HEIGHT, 600)
-            print "Frame resolution set to: (" + str(cap.get(cv.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(cap.get(cv.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
+            print "Frame default resolution: (" + str(camera.get(cv2.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(camera.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
+            camera.set(cv2.CV_CAP_PROP_FRAME_WIDTH, 800)
+            camera.set(cv2.CV_CAP_PROP_FRAME_HEIGHT, 600)
+            print "Frame resolution set to: (" + str(camera.get(cv2.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(camera.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
         except:
             print("Custom resolution not available")
 
