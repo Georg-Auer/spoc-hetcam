@@ -20,8 +20,8 @@ class Camera(BaseCamera):
         camera = cv2.VideoCapture(Camera.video_source)
 
         # https://www.codingforentrepreneurs.com/blog/open-cv-python-change-video-resolution-or-scale
-        camera.set(3, 1280)
-        camera.set(4, 1280)
+        camera.set(3, 720)
+        camera.set(4, 720)
 
         if not camera.isOpened():
             raise RuntimeError('Could not start camera.')
