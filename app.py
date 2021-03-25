@@ -74,7 +74,7 @@ def gen(camera):
     while True:
         frame_enc = camera.get_frame()
 
-        # does not work, needs to be changed into an oop solution
+        # should be changed into an oop solution
         global global_video_frame
         global_video_frame = frame_enc
 

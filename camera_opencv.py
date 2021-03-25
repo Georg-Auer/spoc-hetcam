@@ -32,3 +32,9 @@ class Camera(BaseCamera):
 
             # encode as a jpeg image and return it
             yield cv2.imencode('.jpg', img)[1].tobytes()
+
+    # new method for setting resolution
+    # @staticmethod
+    # def set_video_720p_resolution(source):
+    #     camera.set(3, 1280)
+    #     camera.set(4, 720)
