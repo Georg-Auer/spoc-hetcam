@@ -18,14 +18,9 @@ class Camera(BaseCamera):
     @staticmethod
     def frames():
         camera = cv2.VideoCapture(Camera.video_source)
-        try:
-            print "Frame default resolution: (" + str(camera.get(cv2.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(camera.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
-            camera.set(cv2.CV_CAP_PROP_FRAME_WIDTH, 800)
-            camera.set(cv2.CV_CAP_PROP_FRAME_HEIGHT, 600)
-            print "Frame resolution set to: (" + str(camera.get(cv2.CV_CAP_PROP_FRAME_WIDTH)) + "; " + str(camera.get(cv2.CV_CAP_PROP_FRAME_HEIGHT)) + ")"
-        except:
-            print("Custom resolution not available")
 
+        camera.set(3, 1920)
+        camera.set(4, 720)
 
         if not camera.isOpened():
             raise RuntimeError('Could not start camera.')
