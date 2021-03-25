@@ -19,7 +19,7 @@ class Camera(BaseCamera):
     def frames():
         camera = cv2.VideoCapture(Camera.video_source)
 
-        camera.set(3, 1920)
+        camera.set(3, 1280)
         camera.set(4, 720)
 
         if not camera.isOpened():
