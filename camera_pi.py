@@ -3,7 +3,7 @@ import time
 import picamera
 from base_camera import BaseCamera
 
-
+# https://picamera.readthedocs.io/en/release-1.13/recipes2.html#unencoded-video-capture
 class Camera(BaseCamera):
     @staticmethod
     def frames():
