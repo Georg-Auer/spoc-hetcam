@@ -74,7 +74,7 @@ def gen(camera):
     while True:
         frame_enc = camera.get_frame()
 
-        # does not work, needs to be changed into an oop solution
+        # should be changed into an oop solution
         global global_video_frame
         global_video_frame = frame_enc
 
@@ -125,19 +125,21 @@ def move_deg():
 def motor_task_creator(task_id):
     print(f"start of motor task creator {task_id}")
     # creating motor task that runs every minute
-    scheduler.add_job(func=motor_task, trigger='interval', minutes=60, args=[task_id], id='move'+str(task_id))
+    scheduler.add_job(func=motor_task, trigger='interval', minutes=2, args=[task_id], id='move'+str(task_id))
 
 def picture_task_creator(task_id):
     print(f"start of picture task creator {task_id}")
     # creating picture task that runs every minute
-    scheduler.add_job(func=picture_task, trigger='interval', minutes=60, args=[task_id], id='picture'+str(task_id))
+    scheduler.add_job(func=picture_task, trigger='interval', minutes=2, args=[task_id], id='picture'+str(task_id))
 
 def motor_task(task_id):
     # send to motor position
     print(f"moving to position {task_id}")
+    print(type(task_id))
     motor_position(task_id)
 
 def picture_task(task_position):
+    print(type(task_position))
     print(f"start of picture task {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
     # # foldername = 'images\'
@@ -190,13 +192,14 @@ def toggled_status():
         print(f"moving time is assumed {moving_time} seconds") 
         task_seperation_increase = moving_time*2
         task_seperation = 1
-        for i in range(0, 360, 90): # starting angle, stop angle and step angle in degrees
+        for degree in range(0, 360, 90): # starting angle, stop angle and step angle in degrees
+            print(degree)
             schedule_time_movement = schedule_start + timedelta(seconds=task_seperation)
             schedule_time_picture = schedule_start + timedelta(seconds=moving_time+task_seperation)
-            scheduler.add_job(func=motor_task_creator, trigger='date', run_date=schedule_time_movement, args=[i], id='move_start'+str(i))
-            print(f"created moving job {i} running at {schedule_time_movement}")
-            scheduler.add_job(func=picture_task_creator, trigger='date', run_date=schedule_time_picture, args=[i], id='picture_start'+str(i))
-            print(f"created picture job {i} running at {schedule_time_picture}")
+            scheduler.add_job(func=motor_task_creator, trigger='date', run_date=schedule_time_movement, args=[degree], id='move_start'+str(degree))
+            print(f"created moving job {degree} running at {schedule_time_movement}")
+            scheduler.add_job(func=picture_task_creator, trigger='date', run_date=schedule_time_picture, args=[degree], id='picture_start'+str(degree))
+            print(f"created picture job {degree} running at {schedule_time_picture}")
             task_seperation = task_seperation + task_seperation_increase
         print(scheduler.get_jobs())
 
