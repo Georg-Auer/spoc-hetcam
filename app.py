@@ -74,7 +74,7 @@ def gen(camera):
     while True:
         frame_enc = camera.get_frame()
 
-        # should be changed into an oop solution
+        # does not work, needs to be changed into an oop solution
         global global_video_frame
         global_video_frame = frame_enc
 
@@ -96,11 +96,12 @@ def video_feed():
 
 
 def motor_position(position_in_degree):
-    print("motor_position")
+    print(f"motor_position {position_in_degree}")
     # 4800 steps are 270°, 360 should never be possible since = 0°
     # degrees are divided by 90 and multiplied by 1600
     # only send int values to arduino!
     step_position_arduino = int(position_in_degree/90*1600)
+    print(f"Sending: {step_position_arduino} steps")
     try:
         results = np.array(connect_to_arduino(comport,motor0_enable,motor0_direction,step_position_arduino,
             motor1_enable,motor1_direction,motor1_position,motor2_enable,motor2_direction,motor2_position,motor3_enable,motor3_direction,motor3_position))
@@ -125,22 +126,20 @@ def move_deg():
 def motor_task_creator(task_id):
     print(f"start of motor task creator {task_id}")
     # creating motor task that runs every minute
-    scheduler.add_job(func=motor_task, trigger='interval', minutes=2, args=[task_id], id='move'+str(task_id))
+    scheduler.add_job(func=motor_task, trigger='interval', minutes=1, args=[task_id], id='move'+str(task_id))
 
 def picture_task_creator(task_id):
     print(f"start of picture task creator {task_id}")
     # creating picture task that runs every minute
-    scheduler.add_job(func=picture_task, trigger='interval', minutes=2, args=[task_id], id='picture'+str(task_id))
+    scheduler.add_job(func=picture_task, trigger='interval', minutes=1, args=[task_id], id='picture'+str(task_id))
 
 def motor_task(task_id):
     # send to motor position
-    print(f"moving to position {task_id}")
-    print(type(task_id))
+    print(f"task: moving to position {task_id}")
     motor_position(task_id)
 
 def picture_task(task_position):
-    print(type(task_position))
-    print(f"start of picture task {task_position}")
+    print(f"task: start to take picture {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
     # # foldername = 'images\'
     # # filename = foldername+filename
@@ -164,6 +163,7 @@ def picture_task(task_position):
     # rgb channels are in wrong order since the image is from an raspberry camera
     RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
     cv2.imwrite(filename, RGB_img)
+    print(f"image written {filename}")
 
 
 
