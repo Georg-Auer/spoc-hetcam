@@ -116,8 +116,8 @@ def move_deg():
     degree = int(request.args.get('degree'))
     if(degree >= 280):
         degree = 270
-    if(degree <= -40):
-        degree = -40
+    if(degree <= -90):
+        degree = -90
     print(f"Moving to {degree}°")
     motor_position(degree)
     return '''<h1>Moving to: {}</h1>'''.format(degree)
@@ -192,7 +192,7 @@ def toggled_status():
         print(f"moving time is assumed {moving_time} seconds") 
         task_seperation_increase = moving_time*2
         task_seperation = 1
-        for degree in range(0, 360, 90): # starting angle, stop angle and step angle in degrees
+        for degree in range(0, 90, 90): # starting angle, stop angle and step angle in degrees
             print(degree)
             schedule_time_movement = schedule_start + timedelta(seconds=task_seperation)
             schedule_time_picture = schedule_start + timedelta(seconds=moving_time+task_seperation)
