@@ -115,8 +115,9 @@ void loop()
   motor3.runSpeedToPosition();
 
   if (motor0.distanceToGo()== 0){
-    digitalWrite (motor0_en, HIGH); //motor0
     delay(500);
+    digitalWrite (motor0_en, HIGH); //motor0
+    //delay(500);
     testStruct.motor0_enable = 1; // turn motor off after distanceToGo is 0
   }
   if (motor1.distanceToGo()== 0){
