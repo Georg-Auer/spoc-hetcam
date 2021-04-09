@@ -116,18 +116,19 @@ void loop()
 
   if (motor0.distanceToGo()== 0){
     digitalWrite (motor0_en, HIGH); //motor0
-    testStruct.motor0_enable = 1;
+    delay(500);
+    testStruct.motor0_enable = 1; // turn motor off after distanceToGo is 0
   }
   if (motor1.distanceToGo()== 0){
     digitalWrite (motor1_en, HIGH); //motor1
-    testStruct.motor0_enable = 1;
+    testStruct.motor1_enable = 1;
   }
   if (motor2.distanceToGo()== 0){
     digitalWrite (motor2_en, HIGH); //motor2
-    testStruct.motor0_enable = 1;
+    testStruct.motor2_enable = 1;
   }
   if (motor3.distanceToGo()== 0){
     digitalWrite (motor3_en, HIGH); //motor3
-    testStruct.motor0_enable = 1;
+    testStruct.motor3_enable = 1;
   } 
 }  
