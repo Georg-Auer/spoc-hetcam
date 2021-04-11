@@ -141,6 +141,9 @@ def motor_task(task_id):
     motor_position(task_id)
 
 def picture_task(task_position):
+    # activate camera, this also generates a frame in gif_bytes_io
+    # camera goes back to sleep after 9 s
+    gen(Camera())
     print(f"task: start to take picture {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
     # # foldername = 'images\'
