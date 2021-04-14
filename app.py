@@ -73,14 +73,15 @@ def index():
 
 def gen(camera):
     """Video streaming generator function."""
+    global global_video_frame
+    global global_video_frame_timepoint
+
     while True:
         frame_enc = camera.get_frame()
 
         # does not work, needs to be changed into an oop solution
-        global global_video_frame
         global_video_frame = frame_enc
 
-        global global_video_frame_timepoint
         global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
         # object_methods = [method_name for method_name in dir(camera)
@@ -147,7 +148,7 @@ def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
     # camera goes back to sleep after 9 s
     try:
-        RResponse(gen(Camera()),
+        Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
     except:
         print("could not generate camera")
