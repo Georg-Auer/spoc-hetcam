@@ -15,6 +15,11 @@ import datetime
 # It is advised to set a working directory, like this:
 #os.chdir(r'C:\SPOC\DOC\Calibration\images')
 
+try:
+    camera.close()
+except:
+    print("no open cameras to close")
+
 #for raspicam
 def take_raspicampic(i):
     try:
