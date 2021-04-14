@@ -26,6 +26,8 @@ def take_raspicampic(i):
         from picamera import PiCamera
         from picamera.array import PiRGBArray
         camera = PiCamera()
+        # time.sleep(0.1)
+        print("PiCamera opened")
     except:
         print("camera was not closed last time or is still in use")
         #camera.close()
@@ -35,12 +37,12 @@ def take_raspicampic(i):
     #camera = PiCamera()
     print("Raspberry Camera loaded")
     # following camera settings are not needed
-    x_res = 640
-    y_res = 480
+    # x_res = 640
+    # y_res = 480
     # x_res = 320
     # y_res = 240
     #x_res = y_res = 64
-    camera.resolution = (x_res, y_res)
+    # camera.resolution = (x_res, y_res)
     camera.framerate = 32
     camera.exposure_mode = 'sports'
     # if the iso is set, pictures will look more similar
