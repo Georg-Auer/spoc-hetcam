@@ -62,7 +62,7 @@ motor3_enable = 0
 motor3_direction = 0
 motor3_position = 0
 
-interval_minutes = 60
+interval_minutes = 2
 
 @app.route('/')
 def index():
@@ -79,6 +79,9 @@ def gen(camera):
         # does not work, needs to be changed into an oop solution
         global global_video_frame
         global_video_frame = frame_enc
+
+        global global_video_frame_timepoint
+        global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
@@ -147,9 +150,12 @@ def picture_task(task_position):
         gen(Camera())
     except:
         print("could not generate camera")
-        break
+        return
     print(f"task: start to take picture {task_position}")
-    filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
+    #filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
+
+    filename = f'images/position{task_position}_{global_video_frame_timepoint}.jpg'
+
     # # foldername = 'images\'
     # # filename = foldername+filename
     # print(filename)
