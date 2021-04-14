@@ -15,37 +15,6 @@ import datetime
 # It is advised to set a working directory, like this:
 #os.chdir(r'C:\SPOC\DOC\Calibration\images')
 
-def startcam():
-    bus = PyCapture2.BusManager()
-    numCams = bus.getNumOfCameras()
-    print(numCams)
-    camera = PyCapture2.Camera()
-    uid = bus.getCameraFromIndex(0)
-    camera.connect(uid)
-    camera.startCapture()
-
-def take_micropic(i):
-    import PyCapture2
-    print("Point Grey camera")
-    #startcam is activated here
-    # multiple activation should avoided in the future!!
-    bus = PyCapture2.BusManager()
-    numCams = bus.getNumOfCameras()
-    print(numCams)
-    camera = PyCapture2.Camera()
-    uid = bus.getCameraFromIndex(0)
-    camera.connect(uid)
-    camera.startCapture()
-
-    image = camera.retrieveBuffer()
-    row_bytes = float(len(image.getData())) / float(image.getRows())
-    cv_image = np.array(image.getData(), dtype="uint8").reshape((image.getRows(), image.getCols()) )
-    #cv2.imshow('frame',cv_image)
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    filename = f"position_{i}_{timestr}.jpg"
-    cv2.imwrite(filename, img=cv_image)
-    return filename
-
 #for raspicam
 def take_raspicampic(i):
     try:
@@ -61,16 +30,16 @@ def take_raspicampic(i):
     #camera = PiCamera()
     print("Raspberry Camera loaded")
     # following camera settings are not needed
-    #x_res = 640
-    #y_res = 480
-    x_res = 320
-    y_res = 240
+    x_res = 640
+    y_res = 480
+    # x_res = 320
+    # y_res = 240
     #x_res = y_res = 64
     camera.resolution = (x_res, y_res)
     camera.framerate = 32
     camera.exposure_mode = 'sports'
     # if the iso is set, pictures will look more similar
-    camera.iso = 100
+    camera.iso = 400
     camera.shutter_speed = 1
     #camera.vflip = True
     # alternative rawCapture = PiRGBArray(camera)
@@ -114,32 +83,6 @@ def take_webcampic(i):
     #cv2.destroyAllWindows()
     return filename
 
-def take_ids_cam_pic(i):
-    # pip install pyueye
-    # pip install simple-pyueye
-    # take picture with pyueye!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # not implemented!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    from simple_pyueye import CameraObj as Camera
-
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    filename = f"position_{i}_{timestr}.jpg"
-
-    # camera.capture_still(save=True,filename='img.png') # original line from https://pypi.org/project/simple-pyueye/
-    camera=Camera(CamID)
-    camera.open()
-    camera.capture_still(save=True,filename=filename)
-    camera.close()
-
-    # image = rawCapture.array
-    # # display the image on screen and wait for a keypress
-    # #cv2.imshow("Image", image)
-    # timestr = time.strftime("%Y%m%d-%H%M%S")
-    # filename = ("position_%s_%s.jpg" % (i, timestr))
-    # cv2.imwrite(filename, gray)
-
-    return filename
-
 if __name__ == '__main__':
     print("This module has various camera functions for import.")
     print("For now, picamera, webcam and PyCapture2 can be loaded.")
@@ -148,7 +91,7 @@ if __name__ == '__main__':
     from picamera import PiCamera
     from picamera.array import PiRGBArray
     # os.chdir(r'C:\Users\Georg\Documents\Python Scripts\delta_bot\dustbin')
-    iterations = 10
+    iterations = 1
     try:
         i = 0
         while(i <= iterations):
