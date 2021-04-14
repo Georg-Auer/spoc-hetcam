@@ -147,7 +147,8 @@ def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
     # camera goes back to sleep after 9 s
     try:
-        gen(Camera())
+        RResponse(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
     except:
         print("could not generate camera")
         return
