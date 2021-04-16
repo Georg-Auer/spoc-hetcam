@@ -63,7 +63,7 @@ class BaseCamera(object):
             BaseCamera.last_access = time.time()
 
             # start background frame thread
-            BaseCamera.thread = threading.Thread(target=self._thread)
+            BaseCamera.thread = threading.Thread(target=self._thread, resolution)
             BaseCamera.thread.start()
 
             # wait until frames are available
@@ -90,7 +90,7 @@ class BaseCamera(object):
     #     raise RuntimeError('Must be implemented by subclasses.')
 
     @classmethod
-    def _thread(cls):
+    def _thread(cls, ([1280, 720])):
         """Camera background thread."""
         print('Starting camera thread.')
         frames_iterator = cls.frames()

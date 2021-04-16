@@ -28,6 +28,7 @@ class Camera(BaseCamera):
     #     camera = cv2.VideoCapture(Camera.video_source)
     #     camera.set(3, 1280)
     #     camera.set(4, 720)
+    # [1280, 720]
 
     @staticmethod
     def frames(resolution = [640, 480]):
