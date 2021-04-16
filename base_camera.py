@@ -87,7 +87,7 @@ class BaseCamera(object):
         raise RuntimeError('Must be implemented by subclasses.')
 
     @staticmethod
-    def set_resolution(self):
+    def set_resolution():
         print(BaseCamera.resolution)
         # print(resolution)
         # BaseCamera.resolution = resolution
