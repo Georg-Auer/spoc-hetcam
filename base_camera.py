@@ -95,7 +95,7 @@ class BaseCamera(object):
         """Camera background thread."""
         print('Starting camera thread.')
         BaseCamera.resolution = [320, 240]
-        print(resolution)
+        print(BaseCamera.resolution)
         frames_iterator = cls.frames(BaseCamera.resolution)
         # frames_iterator = cls.frames()
 
