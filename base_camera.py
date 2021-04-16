@@ -90,12 +90,21 @@ class BaseCamera(object):
         """Camera background thread."""
         print('Starting camera thread.')
         frames_iterator = cls.frames()
+
+        global global_video_frame
+        global global_video_frame_timepoint
+
         for frame in frames_iterator:
             BaseCamera.frame = frame
             BaseCamera.event.set()  # send signal to clients
             time.sleep(0)
 
             print('Frame generated.')
+
+            global_video_frame = frame
+            from datetime import datetime, timedelta
+
+            global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
             # if there hasn't been any clients asking for frames in
             # the last 10 seconds then stop the thread
