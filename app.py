@@ -70,12 +70,12 @@ def index():
     """Video streaming home page."""
     return render_template('index.html', images=images)
 
-global global_video_frame
-global global_video_frame_timepoint
+
 
 def gen(camera):
     """Video streaming generator function."""
-
+    global global_video_frame
+    global global_video_frame_timepoint
     while True:
         frame_enc = camera.get_frame()
 
