@@ -89,8 +89,9 @@ class BaseCamera(object):
     # def resolution():
     #     raise RuntimeError('Must be implemented by subclasses.')
 
+    resolution = [1280, 720]
     @classmethod
-    def _thread(cls, [1280, 720]):
+    def _thread(cls, resolution):
         """Camera background thread."""
         print('Starting camera thread.')
         frames_iterator = cls.frames()
