@@ -168,6 +168,7 @@ def picture_task(task_position):
         print("could not find methods for object")
 
     frame = Camera().get_frame()
+    print(frame)
 
     # excluded----------------------------------------------------------------------
     video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
