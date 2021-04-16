@@ -94,9 +94,9 @@ class BaseCamera(object):
     def _thread(cls):
         """Camera background thread."""
         print('Starting camera thread.')
-        self.resolution = [1280, 720]
-        print(self.resolution)
-        frames_iterator = cls.frames(self.resolution)
+        resolution = [1280, 720]
+        print(resolution)
+        frames_iterator = cls.frames(resolution)
 
         for frame in frames_iterator:
             BaseCamera.frame = frame
