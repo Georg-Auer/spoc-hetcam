@@ -182,7 +182,7 @@ def picture_task(task_position):
     # cv2.imwrite(filename, RGB_img)
     # excluded----------------------------------------------------------------------
 
-    frame = camera.get_frame()
+    frame = Camera.get_frame()
     cv2.imwrite(filename, frame)
 
     print(f"image written {filename}")
