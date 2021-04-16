@@ -80,7 +80,7 @@ def gen(camera):
         global_video_frame = frame_enc
         global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-        print(f"frame{global_video_frame_timepoint}")
+        # print(f"frame{global_video_frame_timepoint}")
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
@@ -145,6 +145,8 @@ def motor_task(task_id):
 def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
     # camera goes back to sleep after 10 s
+
+    gen(Camera())
 
     # try:
     #     Response(gen(Camera()),
