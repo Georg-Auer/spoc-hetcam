@@ -85,6 +85,10 @@ class BaseCamera(object):
         """"Generator that returns frames from the camera."""
         raise RuntimeError('Must be implemented by subclasses.')
 
+    # @staticmethod
+    # def resolution():
+    #     raise RuntimeError('Must be implemented by subclasses.')
+
     @classmethod
     def _thread(cls):
         """Camera background thread."""

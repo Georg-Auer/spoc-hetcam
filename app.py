@@ -143,19 +143,13 @@ def motor_task(task_id):
 
 def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
-    # camera goes back to sleep after 10 s
+    # camera does not go back to sleep after 10 s, this was deleted from base_camera
 
-    gen(Camera())
-
-    # try:
-    #     Response(gen(Camera()),
-    #                 mimetype='multipart/x-mixed-replace; boundary=frame')
-    #     time.sleep(1)
-    # except:
-    #     print("could not generate camera")
-    #     return
-
-    
+    try:
+        gen(Camera())
+    except:
+        print("could not generate camera")
+        return
 
     print(f"task: start to take picture {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
@@ -167,7 +161,9 @@ def picture_task(task_position):
     except:
         print("could not find methods for object")
 
+    Camera().set_video_720p_resolution()
     frame = Camera().get_frame()
+    Camera().set_video_low_resolution()
     # print(frame)
 
     video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))

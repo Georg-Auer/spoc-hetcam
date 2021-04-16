@@ -16,12 +16,24 @@ class Camera(BaseCamera):
         Camera.video_source = source
 
     @staticmethod
+    def set_video_low_resolution():
+        # Camera.video_resolution = resolution
+        camera.set(3, 640)
+        camera.set(4, 480)
+
+    # new method for setting resolution
+    @staticmethod
+    def set_video_720p_resolution():
+        camera.set(3, 1280)
+        camera.set(4, 720)
+
+    @staticmethod
     def frames():
         camera = cv2.VideoCapture(Camera.video_source)
 
         # https://www.codingforentrepreneurs.com/blog/open-cv-python-change-video-resolution-or-scale
-        camera.set(3, 640)
-        camera.set(4, 480)
+        # camera.set(3, 640)
+        # camera.set(4, 480)
 
         if not camera.isOpened():
             raise RuntimeError('Could not start camera.')
@@ -33,8 +45,3 @@ class Camera(BaseCamera):
             # encode as a jpeg image and return it
             yield cv2.imencode('.jpg', img)[1].tobytes()
 
-    # new method for setting resolution
-    # @staticmethod
-    # def set_video_720p_resolution(source):
-    #     camera.set(3, 1280)
-    #     camera.set(4, 720)
