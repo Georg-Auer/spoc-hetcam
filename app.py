@@ -161,9 +161,9 @@ def picture_task(task_position):
     except:
         print("could not find methods for object")
 
-    # Camera().set_video_720p_resolution()
+    Camera().set_resolution(1280, 720)
     frame = Camera().get_frame()
-    # Camera().set_video_low_resolution()
+    Camera().set_resolution(640, 480)
     # print(frame)
 
     video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))

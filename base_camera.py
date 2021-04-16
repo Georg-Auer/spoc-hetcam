@@ -56,6 +56,7 @@ class BaseCamera(object):
     frame = None  # current frame is stored here by background thread
     last_access = 0  # time of last client access to the camera
     event = CameraEvent()
+    resolution = [640, 480]
 
     def __init__(self):
         """Start the background camera thread if it isn't running yet."""
@@ -85,16 +86,15 @@ class BaseCamera(object):
         """"Generator that returns frames from the camera."""
         raise RuntimeError('Must be implemented by subclasses.')
 
-    # @staticmethod
-    # def resolution():
-    #     raise RuntimeError('Must be implemented by subclasses.')
+    @staticmethod
+    def set_resolution(resolution):
+        BaseCamera.resolution = resolution
 
-    resolution = [1280, 720]
+    # resolution = [1280, 720]
     @classmethod
     def _thread(cls):
         """Camera background thread."""
         print('Starting camera thread.')
-        # BaseCamera.resolution = [320, 240]
         print(BaseCamera.resolution)
         frames_iterator = cls.frames(BaseCamera.resolution)
         # frames_iterator = cls.frames()
