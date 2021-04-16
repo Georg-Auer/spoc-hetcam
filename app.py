@@ -147,9 +147,10 @@ def picture_task(task_position):
 
     print("Setting higher resolution for automated pictures")
     new_resolution = [1280, 720]
-    Camera().set_resolution(new_resolution)
-
+    # Camera().set_resolution(new_resolution)
+    Camera().resolution = new_resolution
     try:
+        print(Camera().resolution)
         gen(Camera())
         print("Camera generated")
         print(Camera().resolution)
@@ -173,7 +174,8 @@ def picture_task(task_position):
 
     print("Setting lower resolution for webstream")
     new_resolution = [640, 480]
-    Camera().set_resolution(new_resolution)
+    # Camera().set_resolution(new_resolution)
+    Camera().resolution = new_resolution
 
     # resolution = [640, 480]
     # Camera().set_resolution(resolution)
