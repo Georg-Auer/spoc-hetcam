@@ -18,12 +18,14 @@ class Camera(BaseCamera):
     @staticmethod
     def set_video_low_resolution():
         # Camera.video_resolution = resolution
+        camera = cv2.VideoCapture(Camera.video_source)
         camera.set(3, 640)
         camera.set(4, 480)
 
     # new method for setting resolution
     @staticmethod
     def set_video_720p_resolution():
+        camera = cv2.VideoCapture(Camera.video_source)
         camera.set(3, 1280)
         camera.set(4, 720)
 
