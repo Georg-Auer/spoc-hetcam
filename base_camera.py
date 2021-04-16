@@ -63,7 +63,7 @@ class BaseCamera(object):
             BaseCamera.last_access = time.time()
 
             # start background frame thread
-            BaseCamera.thread = threading.Thread(target=self._thread, resolution)
+            BaseCamera.thread = threading.Thread(target=self._thread, self.resolution)
             BaseCamera.thread.start()
 
             # wait until frames are available
