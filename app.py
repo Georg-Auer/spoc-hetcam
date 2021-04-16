@@ -70,23 +70,22 @@ def index():
     """Video streaming home page."""
     return render_template('index.html', images=images)
 
+global global_video_frame
+global global_video_frame_timepoint
 
 def gen(camera):
     """Video streaming generator function."""
-    global global_video_frame
-    global global_video_frame_timepoint
 
-    # while True:
-    frame_enc = camera.get_frame()
+    while True:
+        frame_enc = camera.get_frame()
 
-    global_video_frame = frame_enc
-    global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
+        global_video_frame = frame_enc
+        global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
         # print(object_methods)
 
-    while True:
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_enc + b'\r\n')
 
@@ -153,7 +152,7 @@ def picture_task(task_position):
     # except:
     #     print("could not generate camera")
     #     return
-    
+
     print(f"task: start to take picture {task_position}")
     #filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
 
