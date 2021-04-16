@@ -76,18 +76,17 @@ def gen(camera):
     global global_video_frame
     global global_video_frame_timepoint
 
-    while True:
-        frame_enc = camera.get_frame()
+    # while True:
+    frame_enc = camera.get_frame()
 
-        # does not work, needs to be changed into an oop solution
-        global_video_frame = frame_enc
-
-        global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
+    global_video_frame = frame_enc
+    global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
         # print(object_methods)
 
+    while True:
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_enc + b'\r\n')
 
@@ -146,13 +145,15 @@ def motor_task(task_id):
 
 def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
-    # camera goes back to sleep after 9 s
-    try:
-        Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-    except:
-        print("could not generate camera")
-        return
+    # camera goes back to sleep after 10 s
+
+    # try:
+    #     Response(gen(Camera()),
+    #                 mimetype='multipart/x-mixed-replace; boundary=frame')
+    # except:
+    #     print("could not generate camera")
+    #     return
+    
     print(f"task: start to take picture {task_position}")
     #filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
 
