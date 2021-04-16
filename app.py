@@ -70,8 +70,6 @@ def index():
     """Video streaming home page."""
     return render_template('index.html', images=images)
 
-
-
 def gen(camera):
     """Video streaming generator function."""
     global global_video_frame
@@ -81,6 +79,8 @@ def gen(camera):
 
         global_video_frame = frame_enc
         global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
+
+        print(f"frame{global_video_frame_timepoint}")
 
         # object_methods = [method_name for method_name in dir(camera)
         #     if callable(getattr(camera, method_name))]
