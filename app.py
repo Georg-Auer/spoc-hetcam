@@ -160,27 +160,6 @@ def picture_task(task_position):
     print(f"task: start to take picture {task_position}")
     filename = f'images/position{task_position}_{datetime.now().strftime("%Y%m%d-%H%M%S")}.jpg'
 
-    # excluded----------------------------------------------------------------------
-    # filename = f'images/position{task_position}_{global_video_frame_timepoint}.jpg'
-    # # # foldername = 'images\'
-    # # # filename = foldername+filename
-    # # print(filename)
-    # # # frame_bytes, frame = global_video_cam.get_frame()
-    # # # writing image
-    # gif_bytes_io = BytesIO()
-    # # store the gif bytes to the IO and open as image
-    # gif_bytes_io.write(global_video_frame)
-    # image = Image.open(gif_bytes_io)
-    # # # save as png through a stream
-    # # png_bytes_io = BytesIO() # or io.BytesIO()
-    # # image.save(png_bytes_io, format='PNG')
-    # # # print(png_bytes_io.getvalue()) # outputs the byte stream of the png
-    # # image.show()
-    # open_cv_image = np.array(image)
-    # # rgb channels are in wrong order since the image is from an raspberry camera
-    # RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
-    # cv2.imwrite(filename, RGB_img)
-    # excluded----------------------------------------------------------------------
     try:
         object_methods = [method_name for method_name in dir(Camera)
             if callable(getattr(Camera, method_name))]
@@ -189,6 +168,29 @@ def picture_task(task_position):
         print("could not find methods for object")
 
     frame = Camera().get_frame()
+
+    # excluded----------------------------------------------------------------------
+    filename = f'images/position{task_position}_{global_video_frame_timepoint}.jpg'
+    # # foldername = 'images\'
+    # # filename = foldername+filename
+    # print(filename)
+    # # frame_bytes, frame = global_video_cam.get_frame()
+    # # writing image
+    gif_bytes_io = BytesIO()
+    # store the gif bytes to the IO and open as image
+    gif_bytes_io.write(frame)
+    image = Image.open(gif_bytes_io)
+    # # save as png through a stream
+    # png_bytes_io = BytesIO() # or io.BytesIO()
+    # image.save(png_bytes_io, format='PNG')
+    # # print(png_bytes_io.getvalue()) # outputs the byte stream of the png
+    # image.show()
+    open_cv_image = np.array(image)
+    # rgb channels are in wrong order since the image is from an raspberry camera
+    RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
+    cv2.imwrite(filename, RGB_img)
+    # excluded----------------------------------------------------------------------
+
     cv2.imwrite(filename, frame)
 
     print(f"image written {filename}")
