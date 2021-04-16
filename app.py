@@ -62,7 +62,7 @@ motor3_enable = 0
 motor3_direction = 0
 motor3_position = 0
 
-interval_minutes = 1
+interval_minutes = 2
 
 @app.route('/')
 def index():
@@ -143,17 +143,17 @@ def motor_task(task_id):
 
 def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
-    # camera does not go back to sleep after 10 s, this was deleted from base_camera
+    # camera goes back to sleep after 10 s
 
     print("Setting higher resolution for automated pictures")
     new_resolution = [1280, 720]
-    # Camera().set_resolution(new_resolution)
-    Camera().resolution = new_resolution
+    Camera().set_resolution(new_resolution)
+    # Camera().resolution = new_resolution
     try:
-        print(Camera().resolution)
+        print(f"Resolution should be set to {Camera().resolution}")
         gen(Camera())
         print("Camera generated")
-        print(Camera().resolution)
+        print(f"Resolution was set to {Camera().resolution}")
         # Camera get generated with high resolution?
     except:
         print("Could not generate camera")
@@ -169,17 +169,11 @@ def picture_task(task_position):
     except:
         print("could not find methods for object")
 
-
     frame = Camera().get_frame()
 
-    print("Setting lower resolution for webstream")
-    new_resolution = [640, 480]
-    # Camera().set_resolution(new_resolution)
-    Camera().resolution = new_resolution
-
+    # Camera().resolution = new_resolution
     # resolution = [640, 480]
     # Camera().set_resolution(resolution)
-    # print(frame)
 
     video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
     filename = f'images/position{task_position}_{video_frame_timepoint}.jpg'
@@ -203,6 +197,9 @@ def picture_task(task_position):
     cv2.imwrite(filename, RGB_img)
     print(f"image written {filename}")
 
+    print("Setting lower resolution for webstream")
+    new_resolution = [640, 480]
+    Camera().set_resolution(new_resolution)
 
 
 #-------------------------------------------------------------------------------------
