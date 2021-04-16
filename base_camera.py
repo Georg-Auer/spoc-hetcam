@@ -65,7 +65,7 @@ class BaseCamera(object):
 
             # start background frame thread
             resolution_arg = [BaseCamera.resolution]
-            print(f"Starting Camera thread with resolution: {resolution_arg}")
+            print(f"No threads, starting Camera thread with resolution: {resolution_arg}")
             BaseCamera.thread = threading.Thread(target=self._thread, args=resolution_arg)
             # BaseCamera.thread = threading.Thread(target=self._thread)
             BaseCamera.thread.start()

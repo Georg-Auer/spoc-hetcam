@@ -32,7 +32,7 @@ class Camera(BaseCamera):
 
     @staticmethod
     def frames(resolution = [640, 480]):
-        print(resolution)
+        print(f"camera_opencv resolution: {resolution}")
         camera = cv2.VideoCapture(Camera.video_source)
 
         # https://www.codingforentrepreneurs.com/blog/open-cv-python-change-video-resolution-or-scale
