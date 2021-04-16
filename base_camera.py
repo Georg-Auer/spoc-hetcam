@@ -100,10 +100,8 @@ class BaseCamera(object):
             time.sleep(0)
 
             print('Frame generated.')
-
             global_video_frame = frame
             from datetime import datetime, timedelta
-
             global_video_frame_timepoint = (datetime.now().strftime("%Y%m%d-%H%M%S"))
 
             # if there hasn't been any clients asking for frames in
