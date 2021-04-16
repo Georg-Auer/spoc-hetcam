@@ -62,7 +62,7 @@ motor3_enable = 0
 motor3_direction = 0
 motor3_position = 0
 
-interval_minutes = 2
+interval_minutes = 60
 
 @app.route('/')
 def index():
