@@ -62,7 +62,7 @@ motor3_enable = 0
 motor3_direction = 0
 motor3_position = 0
 
-interval_minutes = 2
+interval_minutes = 1
 
 @app.route('/')
 def index():
@@ -152,7 +152,8 @@ def picture_task(task_position):
     try:
         gen(Camera())
         print("Camera generated")
-        # Camera get generated with high resolution
+        print(Camera().resolution)
+        # Camera get generated with high resolution?
     except:
         print("Could not generate camera")
         return
