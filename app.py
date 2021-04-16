@@ -181,10 +181,12 @@ def picture_task(task_position):
     # RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
     # cv2.imwrite(filename, RGB_img)
     # excluded----------------------------------------------------------------------
-
-    object_methods = [method_name for method_name in dir(Camera())
-        if callable(getattr(camera, method_name))]
-    print(object_methods)
+    try:
+        object_methods = [method_name for method_name in dir(Camera)
+            if callable(getattr(Camera, method_name))]
+        print(object_methods)
+    except:
+        print("could not find methods for object")
 
     frame = Camera().get_frame()
     cv2.imwrite(filename, frame)
