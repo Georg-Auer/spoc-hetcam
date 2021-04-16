@@ -56,7 +56,7 @@ class BaseCamera(object):
     frame = None  # current frame is stored here by background thread
     last_access = 0  # time of last client access to the camera
     event = CameraEvent()
-    # resolution = [640, 480]
+    resolution = [640, 480]
 
     def __init__(self):
         """Start the background camera thread if it isn't running yet."""
@@ -64,7 +64,7 @@ class BaseCamera(object):
             BaseCamera.last_access = time.time()
 
             # start background frame thread
-            BaseCamera.thread = threading.Thread(target=self._thread)
+            BaseCamera.thread = threading.Thread(target=self._thread, args=resolution)
             BaseCamera.thread.start()
 
             # wait until frames are available
@@ -94,8 +94,9 @@ class BaseCamera(object):
 
     # resolution = [1280, 720]
     @classmethod
-    def _thread(cls):
+    def _thread(cls, resolution):
         """Camera background thread."""
+        print(f'Starting camera thread with resolution {resolution}.')
         print(f'Starting camera thread with resolution {BaseCamera.resolution}.')
         frames_iterator = cls.frames(BaseCamera.resolution)
         # frames_iterator = cls.frames()
