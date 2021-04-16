@@ -15,39 +15,14 @@ import datetime
 # It is advised to set a working directory, like this:
 #os.chdir(r'C:\SPOC\DOC\Calibration\images')
 
-def startcam():
-    bus = PyCapture2.BusManager()
-    numCams = bus.getNumOfCameras()
-    print(numCams)
-    camera = PyCapture2.Camera()
-    uid = bus.getCameraFromIndex(0)
-    camera.connect(uid)
-    camera.startCapture()
-
-def take_micropic(i):
-    import PyCapture2
-    print("Point Grey camera")
-    #startcam is activated here
-    # multiple activation should avoided in the future!!
-    bus = PyCapture2.BusManager()
-    numCams = bus.getNumOfCameras()
-    print(numCams)
-    camera = PyCapture2.Camera()
-    uid = bus.getCameraFromIndex(0)
-    camera.connect(uid)
-    camera.startCapture()
-
-    image = camera.retrieveBuffer()
-    row_bytes = float(len(image.getData())) / float(image.getRows())
-    cv_image = np.array(image.getData(), dtype="uint8").reshape((image.getRows(), image.getCols()) )
-    #cv2.imshow('frame',cv_image)
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    filename = f"position_{i}_{timestr}.jpg"
-    cv2.imwrite(filename, img=cv_image)
-    return filename
-
 #for raspicam
 def take_raspicampic(i):
+    try:
+        camera.close()
+        print("camera closed")
+    except:
+        print("camera was not not open")
+
     try:
         from picamera import PiCamera
         from picamera.array import PiRGBArray
