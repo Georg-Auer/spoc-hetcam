@@ -147,6 +147,9 @@ def picture_task(task_position):
 
     print("Setting higher resolution for automated pictures")
     new_resolution = [1280, 720]
+
+    # this triggers the creation of a new thread, with old resolution setting
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Camera().set_resolution(new_resolution)
     # Camera().resolution = new_resolution
     try:
