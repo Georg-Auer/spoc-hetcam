@@ -163,6 +163,7 @@ def picture_task(task_position):
 
     new_resolution = [1280, 720]
     Camera().set_resolution(new_resolution)
+    time.sleep(1)
     frame = Camera().get_frame()
     # resolution = [640, 480]
     # Camera().set_resolution(resolution)
