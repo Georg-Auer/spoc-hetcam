@@ -145,8 +145,12 @@ def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
     # camera does not go back to sleep after 10 s, this was deleted from base_camera
 
+    new_resolution = [1280, 720]
+    Camera().set_resolution(new_resolution)
+
     try:
         gen(Camera())
+        # Camera get generated with high resolution
     except:
         print("could not generate camera")
         return
@@ -161,10 +165,13 @@ def picture_task(task_position):
     except:
         print("could not find methods for object")
 
-    new_resolution = [1280, 720]
-    Camera().set_resolution(new_resolution)
-    time.sleep(1)
+
     frame = Camera().get_frame()
+
+    new_resolution = [640, 480]
+    Camera().set_resolution(new_resolution)
+    # Future Camera get generated with low resolution (for webstream performance)
+
     # resolution = [640, 480]
     # Camera().set_resolution(resolution)
     # print(frame)

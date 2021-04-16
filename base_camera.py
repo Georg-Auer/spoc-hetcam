@@ -88,7 +88,7 @@ class BaseCamera(object):
 
     @staticmethod
     def set_resolution(new_resolution):
-        print(BaseCamera.resolution)
+        print(f"old resolution: {BaseCamera.resolution}")
         print(f"new resolution: {new_resolution}")
         BaseCamera.resolution = new_resolution
 
@@ -96,8 +96,7 @@ class BaseCamera(object):
     @classmethod
     def _thread(cls):
         """Camera background thread."""
-        print('Starting camera thread.')
-        print(BaseCamera.resolution)
+        print(f'Starting camera thread with resolution {BaseCamera.resolution}.')
         frames_iterator = cls.frames(BaseCamera.resolution)
         # frames_iterator = cls.frames()
 
@@ -109,7 +108,6 @@ class BaseCamera(object):
 
             # if there hasn't been any clients asking for frames in
             # the last 10 seconds then stop the thread
-            # maybe don't do this, because automatic needs images?
             if time.time() - BaseCamera.last_access > 10:
                 frames_iterator.close()
                 print('Stopping camera thread due to inactivity.')
