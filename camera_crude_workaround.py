@@ -21,7 +21,7 @@ def take_raspicampic(i):
         camera.close()
         print("camera closed")
     except:
-        print("camera was not not open")
+        print("camera was not open")
 
     try:
         from picamera import PiCamera
