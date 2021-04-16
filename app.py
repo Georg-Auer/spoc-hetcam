@@ -161,8 +161,8 @@ def picture_task(task_position):
     except:
         print("could not find methods for object")
 
-    # resolution = [1280, 720]
-    Camera().set_resolution()
+    new_resolution = [1280, 720]
+    Camera().set_resolution(new_resolution)
     frame = Camera().get_frame()
     # resolution = [640, 480]
     # Camera().set_resolution(resolution)
