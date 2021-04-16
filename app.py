@@ -185,7 +185,7 @@ def picture_task(task_position):
     # png_bytes_io = BytesIO() # or io.BytesIO()
     # image.save(png_bytes_io, format='PNG')
     # # print(png_bytes_io.getvalue()) # outputs the byte stream of the png
-    image.show()
+    # image.show()
     open_cv_image = np.array(image)
     # rgb channels are in wrong order since the image is from an raspberry camera
     RGB_img = cv2.cvtColor(open_cv_image, cv2.COLOR_BGR2RGB)
