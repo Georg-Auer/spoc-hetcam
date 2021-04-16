@@ -95,6 +95,8 @@ class BaseCamera(object):
             BaseCamera.event.set()  # send signal to clients
             time.sleep(0)
 
+            print('Frame generated.')
+
             # if there hasn't been any clients asking for frames in
             # the last 10 seconds then stop the thread
             # maybe don't do this, because automatic needs images?
