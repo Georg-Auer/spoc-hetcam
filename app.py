@@ -151,6 +151,7 @@ def picture_task(task_position):
     try:
         Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+        time.sleep(1)
     except:
         print("could not generate camera")
         return
