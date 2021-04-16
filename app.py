@@ -152,7 +152,7 @@ def picture_task(task_position):
     try:
         print(f"Resolution should be set to {Camera().resolution}")
         gen(Camera())
-        print("Camera generated")
+        # print("Camera generated")
         print(f"Resolution was set to {Camera().resolution}")
         # Camera get generated with high resolution?
     except:
