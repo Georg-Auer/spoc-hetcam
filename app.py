@@ -145,7 +145,7 @@ def picture_task(task_position):
     # activate camera, this also generates a frame in gif_bytes_io
     # camera goes back to sleep after 10 s
 
-    # gen(Camera())
+    gen(Camera())
 
     # try:
     #     Response(gen(Camera()),
