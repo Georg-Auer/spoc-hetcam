@@ -67,6 +67,8 @@ interval_minutes = 60
 @app.route('/')
 def index():
     images = os.listdir('./images')
+    print("List of found images in folder /images")
+    print(images)
     """Video streaming home page."""
     return render_template('index.html', images=images)
 
